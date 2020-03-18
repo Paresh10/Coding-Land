@@ -5,7 +5,9 @@ body {
 }
 
 .squares {
-	margin: 100px; 100px auto 100px;
+	margin: 100px 100px auto 100px;
+	align-content: 
+
 
 }
 
@@ -22,6 +24,7 @@ body {
 .square {
 	display: inline-flex;
 
+
 }
 
 #displayCards div{
@@ -29,6 +32,12 @@ body {
   height: 10vh;
   border-radius: 5px;
   border: 1px solid black;
+  display: inline-flex;	
+  margin-right: 1%;
+}
+
+.cards {
+	text-align: center;
 }
 
 #players2Form {

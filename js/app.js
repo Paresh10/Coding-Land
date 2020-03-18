@@ -40,7 +40,7 @@ const app = {
 	createSquares: function () {
 
 		// create 100 squares
-		for (let i = 0; i < 30; i++) {
+		for (let i = 1; i < 30; i++) {
 
 			const sq = new Square()
 			this.squares.push(sq)
@@ -55,9 +55,44 @@ const app = {
 
 		
 
-		for (let i = 0; i < this.squares.length; i++) {
+		for (let i = 1; i < this.squares.length; i++) {
 
 			const $div = $(`<div data-num-square = "${i}" ></div>`).addClass('square')
+
+			if (i % 15 === 0) {
+				$div.text('javaScript')
+				$div.css({
+					'justify-content': 'center',
+					'align-items': 'center',
+					'color': 'white'
+				})
+				if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
+					$div.css('color', 'black')
+				}
+
+			}
+			else if (i % 20 === 0) {
+				$div.text('CSS')
+				$div.css({
+					'justify-content': 'center',
+					'align-items': 'center',
+					'color': 'white'
+				})
+				if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
+					$div.css('color', 'black')
+				}
+			}
+			else if (i === 9) {
+				$div.text('jQuery!')
+				$div.css({
+					'justify-content': 'center',
+					'align-items': 'center',
+					'color': 'white'
+				})
+				if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
+					$div.css('color', 'black')
+				}
+			}
 			
 
 			$div.css('background-color', this.squares[i].color)
@@ -89,8 +124,30 @@ const app = {
 
 			$div.css('background-color', this.cards[i].color)
 
+			if (this.cards[i].color === 'white') {
+				$div.text('javaScript')
+				$div.css({
+					'justify-content': 'center',
+					'align-items': 'center',
+				})
+			}
+			else if (this.cards[i].color === 'yellow') {
+				$div.text('CSS')
+				$div.css({
+					'justify-content': 'center',
+					'align-items': 'center',
+				})
+			}
+			else if (this.cards[i].color === "blue") {
+				$div.text('HTML')
+				$div.css({
+					'justify-content': 'center',
+					'align-items': 'center',
+					'color': 'white'
+				})
+			}
+
 			$cardDisplay.append($div)
-			console.log($div)
 
 		}
 
