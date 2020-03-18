@@ -40,7 +40,7 @@ const app = {
 	createSquares: function () {
 
 		// create 100 squares
-		for (let i = 1; i < 30; i++) {
+		for (let i = 1; i < 10; i++) {
 
 			const sq = new Square()
 			this.squares.push(sq)
@@ -99,6 +99,8 @@ const app = {
 
 			$squaresContainer.append($div)
 		}
+	
+
 	},
 
 	createCards: function() {
@@ -159,9 +161,18 @@ const app = {
 		const newPlayer = new Player(playersName)
 
 		this.player1.name = newPlayer
-		console.log(newPlayer)
+
+
+		let $player2Icon = $('#player1Icon')
+
+		let $player2IconAnime = $('.animate')
+		$player2IconAnime.css('background-color', 'black')
+
+		$player2Icon.append($player2IconAnime)
+
+		$('.animate').css('background-color', 'red')
+
 		this.printPlayer1()
-		
 
 	},
 
@@ -170,7 +181,10 @@ const app = {
 		const newPlayer = new Player(playersName)
 
 		this.player2.name = newPlayer
-		console.log(newPlayer)
+
+		let $player2IconAnime = $('.animate')
+		$player2IconAnime.css('background-color', 'black')
+
 		this.printPlayer2()
 
 	},
@@ -187,10 +201,9 @@ const app = {
 
 		$pScore.text("Score:")
 
-		console.log($pName.text())
-
 		$div.append($pName)
 		$div.append($pScore)
+
 		
 	},
 
@@ -206,10 +219,29 @@ const app = {
 
 		$pScore.text("Score:")
 
-		console.log($p.text())
-
 		$div.append($p)
 		$div.append($pScore)
+
+
+
+	},
+
+	createPlayerIcon: function() {
+		const $div = $('<div></div>').addClass('animate')
+
+		$(document).ready(function() {
+
+			setInterval(function (){
+				$div.fadeOut(2000);
+				$div.fadeIn(2000);
+			}, 2000); 
+
+		})
+
+
+
+		$('body').append($div)
+
 
 	},
 
@@ -239,6 +271,7 @@ $('#players1Form').on('submit', (event) => {
 	$('#players1Form').hide()
 
 	app.createPlayer1($player1)
+	app.createPlayerIcon()
 })
 
 $('#players2Form').on('submit', (event) => {
@@ -250,7 +283,9 @@ $('#players2Form').on('submit', (event) => {
 	$('#players2Form').trigger('reset')
 
 	$('#players2Form').hide()
+
 	app.createPlayer2($player2)
+	app.createPlayerIcon()
 })
 
 

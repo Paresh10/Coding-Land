@@ -5,6 +5,8 @@
 
 
 Day two: 
-1 Create cards array and render it to each player randomaly.
-2 
+1 Create and display random cards.
+2 Figure out animation
+3 Assign value of displayed card to the board game.
+4 Make animatted div box to move accordingly.
 

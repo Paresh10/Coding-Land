@@ -33,11 +33,20 @@ body {
   border-radius: 5px;
   border: 1px solid black;
   display: inline-flex;	
-  margin-right: 1%;
+  margin-left: 400px;
 }
 
 .cards {
 	text-align: center;
+}
+
+
+.animate{
+  width: 3vh;
+  height: 3vh;
+  border-radius: 50%;
+  border: 1px solid black;
+  /*background-color: red;*/
 }
 
 #players2Form {
@@ -47,6 +56,21 @@ body {
 #printPlayer2Name{
 	float: right;
 }
+
+
+/*.player1Icon {
+	border: 5px grey;
+	height: 100px;
+	width: 200px;
+}
+
+.player2Icon {
+	border: 5px grey;
+	height: 200px;
+	width: 200px;
+	background-color: yellow;
+}*/
+
 
 input {
 	border: 2px solid black	;
