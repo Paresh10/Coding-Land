@@ -35,11 +35,12 @@ const app = {
 	},
 
 	squares: [],
+	cards: [],
 
 	createSquares: function () {
 
 		// create 100 squares
-		for (let i = 0; i < 100; i++) {
+		for (let i = 0; i < 30; i++) {
 
 			const sq = new Square()
 			this.squares.push(sq)
@@ -57,18 +58,43 @@ const app = {
 		for (let i = 0; i < this.squares.length; i++) {
 
 			const $div = $(`<div data-num-square = "${i}" ></div>`).addClass('square')
-
-			// if (i % 5 === 0 ) {
-
-			// 	$div.text("javaScript")
-			// }
-
 			
 
 			$div.css('background-color', this.squares[i].color)
 
 			$squaresContainer.append($div)
 		}
+	},
+
+	createCards: function() {
+
+		 // Create cards array and render it to each player randomaly.
+		for (let i = 0; i < 1; i++) {
+			const card = new Square()
+
+			this.cards.push(card)
+		}
+		this.displayCard()
+
+	},
+
+	displayCard: function() {
+
+		// display card randomaly one by one
+		const $cardDisplay = $('#displayCards')
+
+		for (let i = 0; i < this.cards.length; i++) {
+
+			const $div = $(`<div data-card-square = "${i}" ></div>`).addClass('cards')
+
+			$div.css('background-color', this.cards[i].color)
+
+			$cardDisplay.append($div)
+			console.log($div)
+
+		}
+
+
 	},
 
 	createPlayer1: function(playersName) {
@@ -134,6 +160,7 @@ const app = {
 		this.createSquares()
 		this.createPlayer1()
 		this.createPlayer2()
+		this.createCards()
 
 
 	}

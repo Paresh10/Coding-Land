@@ -2,3 +2,9 @@
 2. Figure out how to have players. Minimum 2 or more
 3. They should enter their name and start playing. 
 4. Track score and status of their game
+
+
+Day two: 
+1 Create cards array and render it to each player randomaly.
+2 
+
