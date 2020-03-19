@@ -126,21 +126,24 @@ const app = {
 
 		const $giveMeACard = $('#give-me-card')
 
+		$cardDisplay.empty()
+
+		const $div = $(`<div></div>`).addClass('cards')
+		// $div.css('background-color', this.cards.color)
+
 		//find a way to clear out the old display, and that will clear the board, but the upcoming for loop 
 		//will just add everything in the cards array automatically.
 		
 		// $cardDisplay.hide()
 
-		const $div = $(`<div></div>`).addClass('cards')  // data-card-square = "${i}" 
+		// const $div = $(`<div ></div>`).addClass('cards')  // 
 	
 
 		for (let i = 0; i < this.cards.length; i++) {
 
 			$div.css('background-color', this.cards[i].color)
-			this.currentCard = this.cards[i]
-
-
-			console.log("this is the current card", this.currentCard)
+			$div.attr('id', `data-card-square = "${i}"`) 
+			
 
 			this.cardColor = this.cards[i].color
 
@@ -172,9 +175,7 @@ const app = {
 
 
 		}
-						$cardDisplay.append($div)
-			$cardDisplay.append($giveMeACard)
-
+			$cardDisplay.append($div)
 
 	},
 
@@ -272,15 +273,12 @@ const app = {
 		this.createSquares()
 		this.createPlayer1()
 		this.createPlayer2()
-		// this.createCards()
 		this.movePlayers()
 
 
 	}
 
 }
-
-
 
 app.startGame()
 
