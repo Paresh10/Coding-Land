@@ -36,6 +36,8 @@ const app = {
 
 	squares: [],
 	cards: [],
+	cardColor: "",
+	currentCard: null,
 
 	createSquares: function () {
 
@@ -110,8 +112,10 @@ const app = {
 			const card = new Square()
 
 			this.cards.push(card)
+			console.log("This is the most recent card made", card)
 		}
 		this.displayCard()
+		console.log("this is the app.cards array", this.cards)
 
 	},
 
@@ -120,11 +124,25 @@ const app = {
 		// display card randomaly one by one
 		const $cardDisplay = $('#displayCards')
 
+		const $giveMeACard = $('#give-me-card')
+
+		//find a way to clear out the old display, and that will clear the board, but the upcoming for loop 
+		//will just add everything in the cards array automatically.
+		
+		// $cardDisplay.hide()
+
+		const $div = $(`<div></div>`).addClass('cards')  // data-card-square = "${i}" 
+	
+
 		for (let i = 0; i < this.cards.length; i++) {
 
-			const $div = $(`<div data-card-square = "${i}" ></div>`).addClass('cards')
-
 			$div.css('background-color', this.cards[i].color)
+			this.currentCard = this.cards[i]
+
+
+			console.log("this is the current card", this.currentCard)
+
+			this.cardColor = this.cards[i].color
 
 			if (this.cards[i].color === 'white') {
 				$div.text('javaScript')
@@ -149,9 +167,13 @@ const app = {
 				})
 			}
 
-			$cardDisplay.append($div)
+
+
+
 
 		}
+						$cardDisplay.append($div)
+			$cardDisplay.append($giveMeACard)
 
 
 	},
@@ -238,18 +260,20 @@ const app = {
 
 		})
 
-
-
 		$('body').append($div)
 
 
+	},
+
+	movePlayers: function() {
 	},
 
 	startGame: function() {
 		this.createSquares()
 		this.createPlayer1()
 		this.createPlayer2()
-		this.createCards()
+		// this.createCards()
+		this.movePlayers()
 
 
 	}
@@ -290,10 +314,11 @@ $('#players2Form').on('submit', (event) => {
 
 
 
+$('#give-me-card').on('click', (event) => {
 
+	app.createCards()
 
-
-
+})
 
 
 
