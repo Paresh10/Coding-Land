@@ -1,345 +1,308 @@
-
 console.log("Coding Land")
 
 // print squares on the board.
 // Give them different random colors of blue, yellow, green, red and white
 class Player {
-	constructor(playersName) {	
-		this.playersName = playersName
-	}
+    constructor(playersName) {
+        this.playersName = playersName
+    }
 }
 
 class Square {
 
-	// create class square and in constructor create array of colors and get it randomly via Math.floo
-	constructor() {
-		const colors = ['red','yellow', 'blue', 'green', 'white']
-		const randomNum = Math.floor(Math.random() * colors.length)
-		this.color = colors[randomNum]
-	}
+    // create class square and in constructor create array of colors and get it randomly via Math.floo
+    constructor() {
+        const colors = ['red', 'yellow', 'blue', 'green', 'white']
+        const randomNum = Math.floor(Math.random() * colors.length)
+        this.color = colors[randomNum]
+    }
 
 }
 
 const app = {
-	player1: {
-		name: "",
-		score: 0,
-		hand: []
-	},
-	
-	player2: {
-		name: "",
-		score: 0,
-		hand: []
-
-	},
-
-	squares: [],
-	cards: [],
-	cardColor: "",
-	currentCard: null,
-
-	createSquares: function () {
-
-		// create 100 squares
-		for (let i = 1; i < 10; i++) {
-
-			const sq = new Square()
-			this.squares.push(sq)
-
-		}
-		this.printSquares()
-	},
-
-	printSquares: function () {
-
-		const $squaresContainer = $('.squares')
-
-		
-
-		for (let i = 1; i < this.squares.length; i++) {
-
-			const $div = $(`<div data-num-square = "${i}" ></div>`).addClass('square')
-
-			if (i % 15 === 0) {
-				$div.text('javaScript')
-				$div.css({
-					'justify-content': 'center',
-					'align-items': 'center',
-					'color': 'white'
-				})
-				if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
-					$div.css('color', 'black')
-				}
-
-			}
-			else if (i % 20 === 0) {
-				$div.text('CSS')
-				$div.css({
-					'justify-content': 'center',
-					'align-items': 'center',
-					'color': 'white'
-				})
-				if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
-					$div.css('color', 'black')
-				}
-			}
-			else if (i === 9) {
-				$div.text('jQuery!')
-				$div.css({
-					'justify-content': 'center',
-					'align-items': 'center',
-					'color': 'white'
-				})
-				if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
-					$div.css('color', 'black')
-				}
-			}
-			
+    player1: {
+        name: "",
+        score: 0,
+        hand: []
+    },
 
-			$div.css('background-color', this.squares[i].color)
+    player2: {
+        name: "",
+        score: 0,
+        hand: []
 
-			$squaresContainer.append($div)
-		}
-	
+    },
 
-	},
+    squares: [],
+    cards: [],
+    cardColor: "",
+    currentCard: null,
 
-	createCards: function() {
+    createSquares: function() {
 
-		 // Create cards array and render it to each player randomaly.
-		for (let i = 0; i < 1; i++) {
-			const card = new Square()
+        // create 100 squares
+        for (let i = 0; i < 30; i++) {
 
-			this.cards.push(card)
-			console.log("This is the most recent card made", card)
-		}
-		this.displayCard()
-		console.log("this is the app.cards array", this.cards)
+            const sq = new Square()
+            this.squares.push(sq)
 
-	},
+        }
+        this.printSquares()
+    },
 
-	displayCard: function() {
+    printSquares: function() {
 
-		// display card randomaly one by one
-		const $cardDisplay = $('#displayCards')
+        const $squaresContainer = $('.squares')
 
-		const $giveMeACard = $('#give-me-card')
 
-		$cardDisplay.empty()
 
-		const $div = $(`<div></div>`).addClass('cards')
-		// $div.css('background-color', this.cards.color)
+        for (let i = 0; i < this.squares.length; i++) {
 
-		//find a way to clear out the old display, and that will clear the board, but the upcoming for loop 
-		//will just add everything in the cards array automatically.
-		
-		// $cardDisplay.hide()
+            const $div = $(`<div data-num-square = "${i}" ></div>`).addClass('square')
 
-		// const $div = $(`<div ></div>`).addClass('cards')  // 
-	
+            if (i % 15 === 0) {
+                $div.text('javaScript')
+                $div.css({
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                    'color': 'white'
+                })
+                if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
+                    $div.css('color', 'black')
+                }
 
-		for (let i = 0; i < this.cards.length; i++) {
+            } else if (i % 20 === 0) {
+                $div.text('CSS')
+                $div.css({
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                    'color': 'white'
+                })
+                if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
+                    $div.css('color', 'black')
+                }
+            } else if (i === 9) {
+                $div.text('jQuery!')
+                $div.css({
+                    'justify-content': 'center',
+                    'align-items': 'center',
+                    'color': 'white'
+                })
+                if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
+                    $div.css('color', 'black')
+                }
+            }
 
-			$div.css('background-color', this.cards[i].color)
-			$div.attr('id', `data-card-square = "${i}"`) 
-			
 
-			this.cardColor = this.cards[i].color
+            $div.css('background-color', this.squares[i].color)
 
-			if (this.cards[i].color === 'white') {
-				$div.text('javaScript')
-				$div.css({
-					'justify-content': 'center',
-					'align-items': 'center',
-				})
-			}
-			else if (this.cards[i].color === 'yellow') {
-				$div.text('CSS')
-				$div.css({
-					'justify-content': 'center',
-					'align-items': 'center',
-				})
-			}
-			else if (this.cards[i].color === "blue") {
-				$div.text('HTML')
-				$div.css({
-					'justify-content': 'center',
-					'align-items': 'center',
-					'color': 'white'
-				})
-			}
+            $squaresContainer.append($div)
+        }
 
 
+    },
 
+    createCards: function() {
 
+        // Create cards array and render it to each player randomaly.
+        for (let i = 0; i < 1; i++) {
+            const card = new Square()
 
-		}
-			$cardDisplay.append($div)
+            this.cards.push(card)
+            console.log("This is the most recent card made", card)
+        }
+        this.displayCard()
+        console.log("this is the app.cards array", this.cards)
 
-	},
+    },
 
-	createPlayer1: function(playersName) {
+    displayCard: function() {
 
-		const newPlayer = new Player(playersName)
+        // display card randomaly one by one
+        const $cardDisplay = $('#displayCards')
 
-		this.player1.name = newPlayer
 
+        // to empty the container
+        $cardDisplay.empty()
 
-		let $player2Icon = $('#player1Icon')
 
-		let $player2IconAnime = $('.animate')
-		$player2IconAnime.css('background-color', 'black')
+        const $div = $(`<div></div>`).addClass('cards')
 
-		$player2Icon.append($player2IconAnime)
+        for (let i = 1; i < this.cards.length; i++) {
 
-		$('.animate').css('background-color', 'red')
+            $div.css('background-color', this.cards[i].color)
+            $div.attr('id', `data-card-square = "${i}"`)
 
-		this.printPlayer1()
 
-	},
+            this.cardColor = this.cards[i].color
 
-	createPlayer2: function(playersName) {
+            // assign it to variable
+            let $trackingCardsColor = this.cardColor
 
-		const newPlayer = new Player(playersName)
+            if ($trackingCardsColor === 'blue' || $trackingCardsColor === 'green' || $trackingCardsColor === 'red') {
+                $div.css('color', 'white')
 
-		this.player2.name = newPlayer
+            } else {
+                $div.css('color', 'black')
+            }
 
-		let $player2IconAnime = $('.animate')
-		$player2IconAnime.css('background-color', 'black')
+            if (i % 7 == 0) {
+                $div.text('javaScript')
+                $div.css({
+                    'justify-content': 'center',
+                    'align-items': 'center'
+                })
 
-		this.printPlayer2()
+            } else if (i % 20 === 0) {
+                $div.text('jQuery!!')
+                $div.css({
+                    'justify-content': 'center',
+                    'align-items': 'center'
+                })
 
-	},
+            } else {
+                $div.text("")
 
-	printPlayer1: function() {
-		const $div = $('#printPlayer1Name')
-		$div.text("")
+            }
 
+        }
+        $cardDisplay.append($div)
 
-		const $pName = $("<p></p>")
-		const $pScore = $("<p></p>")
+    },
 
-		$pName.text(`Name: ${this.player1.name.playersName}`)
+    createPlayer1: function(playersName) {
 
-		$pScore.text("Score:")
+        const newPlayer = new Player(playersName)
 
-		$div.append($pName)
-		$div.append($pScore)
+        this.player1.name = newPlayer
 
-		
-	},
+        let $player1IconAnime = $('.animate')
+        $player1IconAnime.css('background-color', 'black')
 
-	printPlayer2: function() {
-		const $div = $('#printPlayer2Name')
-		$div.text("")
+        this.printPlayer1()
 
+    },
 
-		const $p = $("<p></p>")
-		const $pScore = $("<p></p>")
+    createPlayer2: function(playersName) {
 
-		$p.text(`Name: ${this.player2.name.playersName}`)
+        const newPlayer = new Player(playersName)
 
-		$pScore.text("Score:")
+        this.player2.name = newPlayer
 
-		$div.append($p)
-		$div.append($pScore)
+        let $player2IconAnime = $('.animate')
+        $player2IconAnime.css('background-color', 'red')
 
+        this.printPlayer2()
 
+    },
 
-	},
+    printPlayer1: function() {
+        const $div = $('#printPlayer1Name')
+        $div.text("")
 
-	createPlayerIcon: function() {
-		const $div = $('<div></div>').addClass('animate')
 
-		$(document).ready(function() {
+        const $pName1 = $("<p></p>")
+        const $pScore1 = $("<p></p>")
 
-			setInterval(function (){
-				$div.fadeOut(2000);
-				$div.fadeIn(2000);
-			}, 2000); 
+        $pName1.text(`Name: ${this.player1.name.playersName}`)
 
-		})
+        $pScore1.text("Score:")
 
-		$('body').append($div)
+        $div.append($pName1)
+        $div.append($pScore1)
 
 
-	},
+    },
 
-	movePlayers: function() {
-	},
+    printPlayer2: function() {
+        const $div = $('#printPlayer2Name')
+        $div.text("")
 
-	startGame: function() {
-		this.createSquares()
-		this.createPlayer1()
-		this.createPlayer2()
-		this.movePlayers()
 
+        const $pName2 = $("<p></p>")
+        const $pScore2 = $("<p></p>")
 
-	}
+        $pName2.text(`Name: ${this.player2.name.playersName}`)
+
+        $pScore2.text("Score:")
+
+        $div.append($pName2)
+        $div.append($pScore2)
+
+
+
+    },
+
+    createPlayerIcon: function() {
+        const $div = $('<div></div>').addClass('animate')
+
+        $(document).ready(function() {
+
+            setInterval(function() {
+                $div.fadeOut(2000);
+                $div.fadeIn(2000);
+            }, 2000);
+
+        })
+
+        $('body').append($div)
+
+
+    },
+
+    movePlayers: function() {},
+
+    startGame: function() {
+        this.createSquares()
+        this.createPlayer1()
+        this.createPlayer2()
+
+
+    }
 
 }
 
 app.startGame()
 
 
+// for player 1
 $('#players1Form').on('submit', (event) => {
 
-	event.preventDefault()
+    event.preventDefault()
 
-	const $player1 = $('#player1').val()
+    const $player1 = $('#player1').val()
 
-	$('#players1Form').trigger('reset')
-	$('#players1Form').hide()
+    $('#players1Form').trigger('reset')
+    $('#players1Form').hide()
 
-	app.createPlayer1($player1)
-	app.createPlayerIcon()
+    app.createPlayer1($player1)
+    app.createPlayerIcon()
 })
 
+// for player 2
 $('#players2Form').on('submit', (event) => {
 
-	event.preventDefault()
+    event.preventDefault()
 
-	const $player2 = $('#player2').val()
+    const $player2 = $('#player2').val()
 
-	$('#players2Form').trigger('reset')
+    $('#players2Form').trigger('reset')
 
-	$('#players2Form').hide()
+    $('#players2Form').hide()
 
-	app.createPlayer2($player2)
-	app.createPlayerIcon()
+    app.createPlayer2($player2)
+    app.createPlayerIcon()
 })
 
 
-
+// for player 1
 $('#give-me-card').on('click', (event) => {
 
-	app.createCards()
+    app.createCards()
 
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// for player 2
+$('#give-me-card2').on('click', (event) => {
+    app.createCards()
+})
