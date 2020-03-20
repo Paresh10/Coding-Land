@@ -20,8 +20,9 @@ body {
 }
 
 .square {
-	display: inline-flex;
-
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
 
 }
 
