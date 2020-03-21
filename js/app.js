@@ -26,13 +26,17 @@
                 score: 0,
                 hand: null,
                 anime: null,
-                text: ""
+                text: "",
+                location: null
             },
 
             player2: {
                 name: "",
                 score: 0,
-                hand: []
+                hand: [],
+                anime: null,
+                text: "",
+                location: null
 
             },
 
@@ -107,7 +111,7 @@
                     // })
 
                     $div.text(this.squares[i].text)
-                    $div.css('background-color', this.squares[i].color)
+                    $div.css('background-color', "white")
 
                     $squaresContainer.append($div)
                 }
@@ -207,6 +211,7 @@
 
                 this.player1.anime = $('.animate')
                 this.player1.anime.css('background-color', 'black')
+                 $('#StartBox').append(this.player1.anime)
 
                 this.printPlayer1()
                
@@ -219,8 +224,9 @@
 
                 this.player2.name = newPlayer
 
-                let $player2IconAnime = $('.animate')
-                $player2IconAnime.css('background-color', 'red')
+                this.player2.anime = $('.animate')
+                this.player2.anime.css('background-color', 'red')
+                $('#StartBox2').append(this.player2.anime)
 
                 this.printPlayer2()
 
@@ -231,16 +237,11 @@
                 $div.text("")
 
 
-                const $pName1 = $("<p></p>")
-                const $pScore1 = $("<p></p>")
+                const $pName1 = $("<p></p>").addClass("pName")
 
                 $pName1.text(`Name: ${this.player1.name.playersName}`)
 
-                $pScore1.text("Score:")
-
                 $div.append($pName1)
-                $div.append($pScore1)
-
 
             },
 
@@ -249,17 +250,11 @@
                 $div.text("")
 
 
-                const $pName2 = $("<p></p>")
-                const $pScore2 = $("<p></p>")
+                const $pName2 = $("<p></p>").addClass("pName")
 
                 $pName2.text(`Name: ${this.player2.name.playersName}`)
 
-                $pScore2.text("Score:")
-
                 $div.append($pName2)
-                $div.append($pScore2)
-
-
 
             },
 
@@ -280,7 +275,7 @@
 
             },
 
-            movePlayers: function() {
+            movePlayers: function(playerNumber) {
              //    console.log('gameSpecialLocations: cards.length: ' + this.cards.length)
             	// for (let i = 0; i < this.cards.length;) {
             	// 	if (true || this.player1.hand[i].color == 'blue') {
@@ -293,18 +288,31 @@
                 // if (this.player1.hand === this.currentCard) {
                 
                 // }
-                $('.animate').text('player1')
+               
 
 
 
                 for (let i = this.squares.length - 1; i >=0 ; i--) {
                     // c
-                    if (this.player1.text !== "javaScript") {
+                    // if (this.player1.text !== "javaScript") 
+                    // {
 
-                        $(`39`).append($('.animate')) ||  $(`.38`).append($('.animate'))
-                      
+                    //     // $(`square[i]`).append($('.animate'))
+                    //      $('.animate').text('player1')
+                    //      console.log(`square ${i}`)
+                    
+                         this.player1.location = i // corresponds to the card index number
+
+
+                         if (this.player1.hand.color === this.squares[i].color) {
+                            console.log("Card is found!")
+                            console.log(this.player1.location)
+
+                            // append it to the players location if get a match and stop the loop
+                            return
+                         } 
       
-                    }
+                    // }
 
 
                 }
@@ -337,7 +345,7 @@
             const $player1 = $('#player1').val()
 
             $('#players1Form').trigger('reset')
-            $('#players1Form').hide()
+            // $('#players1Form').hide()
 
             app.createPlayer1($player1)
             app.createPlayerIcon()
@@ -352,7 +360,7 @@
 
             $('#players2Form').trigger('reset')
 
-            $('#players2Form').hide()
+            // $('#players2Form').hide()
 
             app.createPlayer2($player2)
             app.createPlayerIcon()
