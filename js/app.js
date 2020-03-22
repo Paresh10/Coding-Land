@@ -23,18 +23,14 @@ class Square {
 const app = {
     player1: {
         name: "",
-        score: 0,
         hand: null,
-        anime: null,
         text: "",
         location: null
     },
 
     player2: {
         name: "",
-        score: 0,
-        hand: [],
-        anime: null,
+        hand: null,
         text: "",
         location: null
 
@@ -54,7 +50,7 @@ const app = {
             let skill = "";
 
             if (i == 7 || i == 28) {
-                skill = "javaScript"
+                skill = "JavaScript"
 
 
             } else if (i == 3 || i == 24) {
@@ -114,7 +110,13 @@ const app = {
 
             // })
 
-            $div.text(this.squares[i].text)
+            // $div.html(this.squares[i].text + '<br />')
+
+            $div.html(
+                '<p id="skill">' + this.squares[i].text + '</p>' +
+                '<p id="slot1" />' +
+                '<p id="slot2" />')
+
             $div.css('background-color', "white")
 
             $squaresContainer.append($div)
@@ -130,11 +132,11 @@ const app = {
             const card = new Square()
 
             this.cards.push(card)
-            console.log("This is the most recent card made", card)
+            // console.log("This is the most recent card made", card)
 
         }
         this.displayCard()
-        console.log("this is the app.cards array", this.cards)
+        // console.log("this is the app.cards array", this.cards)
 
 
     },
@@ -164,30 +166,22 @@ const app = {
             // assign it to variable
             let $trackingCardsColor = this.cardColor
 
-            if ($trackingCardsColor === 'blue' || $trackingCardsColor === 'green' || $trackingCardsColor === 'red') {
-                $div.css('color', 'white')
-
-            } else {
-                $div.css('color', 'black')
-            }
-
-            if (i % 7 == 0) {
-                this.currentCard.text = "javaScript"
-                $div.text('javaScript')
+            if (i % 5 == 1) {
+                this.currentCard.text = "Move 2 steps"
+                $div.text("Move 2 steps")
                 $div.css({
                     'justify-content': 'center',
                     'align-items': 'center'
                 })
 
-            } else if (i % 20 === 0) {
-                $div.text('jQuery!!')
+            } 
+            else {
+                this.currentCard.text = "Move 1 Step"
+                $div.text("Move 1 step")
                 $div.css({
                     'justify-content': 'center',
                     'align-items': 'center'
-                })
-
-            } else {
-                $div.text("")
+                })                
 
             }
 
@@ -199,11 +193,10 @@ const app = {
 
     plyayer1Card: function() {
         this.player1.hand = this.currentCard
-        this.player1.text = this.currentCard.text
     },
 
     plyayer2Card: function() {
-        this.player2.hand.push(this.currentCard)
+        this.player2.hand = this.currentCard
     },
 
 
@@ -213,9 +206,6 @@ const app = {
 
         this.player1.name = newPlayer
 
-        this.player1.anime = $('.animate')
-        this.player1.anime.css('background-color', 'black')
-        $('#StartBox').append(this.player1.anime)
 
         this.printPlayer1()
 
@@ -228,9 +218,6 @@ const app = {
 
         this.player2.name = newPlayer
 
-        this.player2.anime = $('.animate')
-        this.player2.anime.css('background-color', 'red')
-        $('#StartBox2').append(this.player2.anime)
 
         this.printPlayer2()
 
@@ -244,7 +231,6 @@ const app = {
         const $pName1 = $("<p></p>").addClass("pName")
 
         let playerName = this.player1.name.playersName
-        // playerName.classList.add('playerNames')
 
         if (playerName === undefined)
             playerName = ''
@@ -262,50 +248,90 @@ const app = {
 
         const $pName2 = $("<p></p>").addClass("pName")
 
-        $pName2.text(`Name: ${this.player2.name.playersName}`)
+        let playerName = this.player2.name.playersName
+
+        if (playerName === undefined)
+            playerName = ''
+
+        $pName2.text(`Name: ${playerName}`)
+
 
         $div.append($pName2)
 
     },
 
-    createPlayerIcon: function() {
-        const $div = $('<div></div>').addClass('animate')
+    movePlayer: function(player, slotId) {
 
-        $(document).ready(function() {
-
-            setInterval(function() {
-                $div.fadeOut(2000);
-                $div.fadeIn(2000);
-            }, 2000);
-
-        })
-
-        $('#StartBox').append($div)
-
-
-    },
-
-    movePlayer1: function() {
-
-        if (this.player1.location == null) {
-            this.player1.location = this.squares.length - 1;
-        } else {
-            $('.' + this.player1.location).html('')
-
-            this.player1.location--;
+        if (player.location == null) // if the player is just starting...
+        {
+            player.location = this.squares.length - 1;
         }
+        else // if the player is already on a card...
+        {  
+ 
+            if (this.previousCardContents) // if we saved the previous card content...
+            {
+                $('.' + player.location).find(slotId).html(this.previousCardContents)
 
-        $('.' + this.player1.location).append(this.player1.name.playersName)
+                this.previousCardContents = null;
+            }
 
-        app.gameSpecialSquares()
+            else // we don't have any contents for the previous card...
+            {
+                $('.' + player.location).find(slotId).html('')
+            }
 
+            if (player.location === 28)
+                player.location = 7
+            if (player.location === 24)
+                player.location = 3
+            if (player.location === 19)
+                player.location = 5
+            if (player.location === 1)
+                player.location = 25
+            else 
 
+                player.location--;
+        }
+         if (this.currentCard.text == "Move 2 steps") {
+                player.location -= 1
+            }
 
+        let newCardClass = '.' + player.location;
+
+        // Save the card's contents for later.
+        this.previousCardContents = $(newCardClass).find(slotId).html();
+
+        // Append the player's name to the card's content.
+        $(newCardClass).find(slotId).html(player.name.playersName)
     },
 
-    gameSpecialSquares: function() {
-        if (this.player1.location == this.squares[28]) {
-            $('.7' + this.player1.location).append(this.player1.name.playersName)
+    winCheckForPlayer1: function() {
+
+        if (this.player1.location <= 0) {
+
+            const $winMessage = $('<p></p>').addClass('.winMessage')
+            $winMessage.text(`Congratulations ${this.player1.name.playersName}`)
+
+            $('#winner').show()
+            $('#displayCards').hide()
+
+            $('#winner').append($winMessage)
+            return
+        }
+    },
+
+    winCheckForPlayer2: function() {
+        if (this.player2.location <= 0) {
+
+            const $winMessage = $('<p></p>').addClass('.winMessage')
+            $winMessage.text(`Congratulations ${this.player2.name.playersName}`)
+
+            $('#winner').show()
+            $('#displayCards').hide()
+
+            $('#winner').append($winMessage)
+            return
         }
     },
 
@@ -332,10 +358,8 @@ $('#players1Form').on('submit', (event) => {
     const $player1 = $('#player1').val()
 
     $('#players1Form').trigger('reset')
-    // $('#players1Form').hide()
 
     app.createPlayer1($player1)
-    app.createPlayerIcon()
 })
 
 // for player 2
@@ -347,10 +371,7 @@ $('#players2Form').on('submit', (event) => {
 
     $('#players2Form').trigger('reset')
 
-    // $('#players2Form').hide()
-
     app.createPlayer2($player2)
-    app.createPlayerIcon()
 })
 
 
@@ -359,7 +380,8 @@ $('#give-me-card').on('click', (event) => {
 
     app.createCards()
     app.plyayer1Card()
-    app.movePlayer1()
+    app.movePlayer(app.player1, '#slot1')
+    app.winCheckForPlayer1()
 
 
 
@@ -370,6 +392,8 @@ $('#give-me-card2').on('click', (event) => {
 
     app.createCards()
     app.plyayer2Card()
+    app.movePlayer(app.player2, '#slot2')
+    app.winCheckForPlayer2()
 })
 
 

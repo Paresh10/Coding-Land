@@ -47,14 +47,17 @@ h1 {
   display: inline-flex;	
 }
 
+/*.pokemon2{
+	width: 30%;
+}*/
 
-
+/*
 .animate{
   width: 3vh;
   height: 3vh;
   border-radius: 50%;
   border: 2px solid black;
-}
+}*/
 
 #StartBox{
 	margin-left: 200px;
@@ -137,6 +140,15 @@ label {
 	font-size: 2em;
 }
 
+#winner{
+	display: none;
+	color: white;
+	font-size: 4em;
+}
+
+#super-hacker{
+
+}
 
 #footer{
 	margin-top: 50px;
