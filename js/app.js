@@ -85,32 +85,6 @@ const app = {
 
 
             this.squaresCard = this.squares[i].color
-            // if (i == 6 || i == 30) {
-            //     $div.text('javaScript')
-
-            //     if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
-            //         $div.css('color', 'black')
-            //     }
-
-            // } else if (i == 9 || i == 25) {
-            //     $div.text('CSS')
-
-            //     if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
-            //         $div.css('color', 'black')
-            //     }
-            // } else if (i == 3 || i == 19) {
-            //     $div.text('jQuery!')
-
-            //     if (this.squares[i].color === 'white' || this.squares[i].color === 'yellow') {
-            //         $div.css('color', 'black')
-            //     }
-            // }
-            // $div.css({
-            //     'vertical-align': 'top'
-
-            // })
-
-            // $div.html(this.squares[i].text + '<br />')
 
             $div.html(
                 '<p id="skill">' + this.squares[i].text + '</p>' +
@@ -132,11 +106,9 @@ const app = {
             const card = new Square()
 
             this.cards.push(card)
-            // console.log("This is the most recent card made", card)
-
         }
         this.displayCard()
-        // console.log("this is the app.cards array", this.cards)
+
 
 
     },
@@ -174,14 +146,13 @@ const app = {
                     'align-items': 'center'
                 })
 
-            } 
-            else {
+            } else {
                 this.currentCard.text = "Move 1 Step"
                 $div.text("Move 1 step")
                 $div.css({
                     'justify-content': 'center',
                     'align-items': 'center'
-                })                
+                })
 
             }
 
@@ -265,21 +236,19 @@ const app = {
         if (player.location == null) // if the player is just starting...
         {
             player.location = this.squares.length - 1;
-        }
-        else // if the player is already on a card...
-        {  
- 
+        } else // if the player is already on a card...
+        {
+
             if (this.previousCardContents) // if we saved the previous card content...
             {
                 $('.' + player.location).find(slotId).html(this.previousCardContents)
 
                 this.previousCardContents = null;
-            }
-
-            else // we don't have any contents for the previous card...
+            } else // we don't have any contents for the previous card...
             {
                 $('.' + player.location).find(slotId).html('')
             }
+
 
             if (player.location === 28)
                 player.location = 7
@@ -289,13 +258,13 @@ const app = {
                 player.location = 5
             if (player.location === 1)
                 player.location = 25
-            else 
+            else
 
                 player.location--;
         }
-         if (this.currentCard.text == "Move 2 steps") {
-                player.location -= 1
-            }
+        if (this.currentCard.text == "Move 2 steps") {
+            player.location -= 1
+        }
 
         let newCardClass = '.' + player.location;
 
@@ -310,6 +279,8 @@ const app = {
 
         if (this.player1.location <= 0) {
 
+            const winMusic = new Audio('sounds/mario.mp3')
+            winMusic.play()
             const $winMessage = $('<p></p>').addClass('.winMessage')
             $winMessage.text(`Congratulations ${this.player1.name.playersName}`)
 
@@ -335,7 +306,26 @@ const app = {
         }
     },
 
+    playMusic: function() {
+
+        if (this.player1.location <= 0 || this.player2.location <= 0) {
+
+            const startTheGame = new Audio("sounds/underground.mp3")
+            startTheGame.play()
+
+        } else {
+
+            startTheGame.pause()
+
+            const winMusic = new Audio('sounds/mario.mp3')
+            winMusuc.play()
+        }
+
+    },
+
+
     startGame: function() {
+
         this.createSquares()
         this.createPlayer1()
         this.createPlayer2()
@@ -397,10 +387,9 @@ $('#give-me-card2').on('click', (event) => {
 })
 
 
+$('#music').on('click', (event) => {
+    app.playMusic()
 
 
-////////ON Movement
-//You will need to set the player's starting location, and if you're using append, find the class, id, or other identifier of the div to move to based on player current position, and the value of the card they drew
 
-
-//Otherwise you can change innerHTML or other attributes of the elements to make it look like the players are moving. I would suggest append, or trying that first at least.
+})

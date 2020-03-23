@@ -11,7 +11,7 @@ h1 {
 }
 
 .squares {
-	width: 50%;
+	width: 60%;
 	justify-content: center;
 	align-items: center;
 	display: inline-block;
@@ -47,18 +47,6 @@ h1 {
   display: inline-flex;	
 }
 
-/*.pokemon2{
-	width: 30%;
-}*/
-
-/*
-.animate{
-  width: 3vh;
-  height: 3vh;
-  border-radius: 50%;
-  border: 2px solid black;
-}*/
-
 #StartBox{
 	margin-left: 200px;
 }
@@ -70,30 +58,17 @@ h1 {
 .player1div{
 	color: #F0ECEA;
 	margin-top: 100px;
-	width: 25%;
+	width: 20%;
 	float: left;
 }
 
 .player2div{
 	color: #F0ECEA;
 	margin-top: 100px;
-	width: 25%;
+	width: 20%;
 	float: right;
 
 }
-
-/*.player1Icon {
-	border: 5px grey;
-	height: 100px;
-	width: 200px;
-}
-
-.player2Icon {
-	border: 5px grey;
-	height: 200px;
-	width: 200px;
-	background-color: yellow;
-}*/
 
 
 input {
@@ -130,11 +105,6 @@ label {
 
 }
 
-/*#give-me-card2{
-	margin-top: 200px;
-	margin-left: 200px;
-}
-*/
 
 .pName{
 	font-size: 2em;
